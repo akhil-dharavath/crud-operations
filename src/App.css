@@ -1,0 +1,84 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.mainDiv {
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+  margin-top: 10%;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+form div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0px;
+}
+
+form input {
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid gray;
+  border-radius: 7px;
+}
+
+form .title {
+  width: 300px;
+}
+
+form .description {
+  width: 500px;
+}
+
+form div button, .delete button{
+  padding: 6px 20px;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.delete{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:0px 10px 5px;
+  border: 1px solid black;
+  background: lightgray;
+  border-radius: 7px;
+  margin-top: 10px;
+}
+
+.delete h1{
+  font-size: 24px;
+}
+
+.delete p{
+  font-size: 20px;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.updates{
+  margin-top: 20px;
+}
+
+.buttons button{
+  padding: 10px 20px !important;
+  font-weight: 600;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root, .css-4jnixx-MuiStack-root{
+  margin: 0px;
+}
