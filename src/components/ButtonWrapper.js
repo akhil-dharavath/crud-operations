@@ -4,7 +4,11 @@ const ButtonWrapper = ({ day, onClick, dayFilter }) => {
   const active = day.toLowerCase() === dayFilter.toLowerCase();
   return (
     <button
-      style={{ padding: 10, background: active ? "darkgray" : "" }}
+      style={{
+        padding: 10,
+        background: active ? "darkgray" : "",
+        cursor: "pointer",
+      }}
       onClick={() => onClick()}
     >
       {day}

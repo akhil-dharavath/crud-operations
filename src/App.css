@@ -18,7 +18,7 @@ form div {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px 0px;
+  margin: 5px 0px;
 }
 
 form input {
@@ -40,6 +40,7 @@ form div button, .delete button{
   padding: 6px 20px;
   font-weight: bold;
   font-size: 17px;
+  cursor: pointer;
 }
 
 .delete{

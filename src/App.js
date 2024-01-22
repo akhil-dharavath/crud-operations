@@ -8,17 +8,23 @@ import DateFieldValue from "./components/DateField";
 function App() {
   const currentDate = dayjs();
   const [value, setValue] = useState(currentDate);
+  const [details, setDetails] = useState([]);
+  const [updating, setUpdating] = useState(false);
+  const [dayFilter, setDayFilter] = useState("Sun");
 
   const [data, setData] = useState({
     title: "",
     description: "",
     day: "",
   });
+
+  // update the title and description fields
   const update = (e) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
 
+  // get day for the particular date
   useEffect(() => {
     setData((prevData) => ({
       ...prevData,
@@ -26,29 +32,27 @@ function App() {
     }));
   }, [value]);
 
-  const [details, setDetails] = useState([]);
-  const [updating, setUpdating] = useState(false);
-
+  // add or insert data - we have same button for adding and updating
   const addData = (e) => {
     e.preventDefault();
     const getId = localStorage.getItem("updateId");
     const id = Date.now();
+    // we check whether we are updating or adding new entry
     if (updating) {
+      // filter out the updating entry
       const done = details.filter((detail) => detail.id !== getId);
-      setDetails([done, { ...data, id: getId }]);
+      setDetails([done, { ...data, id: getId }]);// add as new entry 
       localStorage.removeItem("updateId");
+      setData({ title: "", description: "", day: "" });
       setUpdating(false);
-      console.log("clicked");
-      setData({ title: "", description: "", day: "" });
     } else {
-      setDetails([...details, { ...data, id }]);
-      setData({ title: "", description: "", day: "" });
-      setValue(currentDate);
+      setDetails([...details, { ...data, id }]);// add new entry
+      setData({ title: "", description: "", day: "" }); // default empty fields
+      setValue(currentDate); // default date as current date
     }
   };
 
-  const [dayFilter, setDayFilter] = useState("Sun");
-
+  // deleting the entry
   const updateDetail = (id) => {
     const update = details.filter((detail) => detail.id === id)[0];
     localStorage.setItem("updateId", update.id);
@@ -87,6 +91,8 @@ function App() {
           <button type="submit">SAVE</button>
         </div>
       </form>
+      
+      {/* week buttons */}
       <div className="buttons">
         <ButtonWrapper
           day="SUN"
@@ -124,6 +130,8 @@ function App() {
           dayFilter={dayFilter}
         />
       </div>
+      
+      {/* filter according to days of week */}
       <div className="updates">
         {details.length > 0
           ? details
