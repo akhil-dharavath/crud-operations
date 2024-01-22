@@ -35,13 +35,15 @@ function App() {
   // add or insert data - we have same button for adding and updating
   const addData = (e) => {
     e.preventDefault();
-    const getId = localStorage.getItem("updateId");
+    const getId = parseInt(localStorage.getItem("updateId"))
     const id = Date.now();
+
     // we check whether we are updating or adding new entry
     if (updating) {
+
       // filter out the updating entry
       const done = details.filter((detail) => detail.id !== getId);
-      setDetails([done, { ...data, id: getId }]);// add as new entry 
+      setDetails([...done, { ...data, id: getId }]);// add as new entry 
       localStorage.removeItem("updateId");
       setData({ title: "", description: "", day: "" });
       setUpdating(false);
@@ -72,12 +74,6 @@ function App() {
             onChange={(e) => update(e)}
             required
           />
-          {/* <input
-            type="date"
-            name="date"
-            value={data.date}
-            onChange={(e) => update(e)}
-          /> */}
           <DateFieldValue value={value} setValue={setValue} />
         </div>
         <div>
