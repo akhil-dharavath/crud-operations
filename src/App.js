@@ -16,6 +16,7 @@ function App() {
     title: "",
     description: "",
     day: "",
+    date: currentDate,
   });
 
   // update the title and description fields
@@ -35,22 +36,24 @@ function App() {
   // add or insert data - we have same button for adding and updating
   const addData = (e) => {
     e.preventDefault();
-    const getId = parseInt(localStorage.getItem("updateId"))
+    const getId = parseInt(localStorage.getItem("updateId"));
     const id = Date.now();
 
     // we check whether we are updating or adding new entry
     if (updating) {
-
       // filter out the updating entry
       const done = details.filter((detail) => detail.id !== getId);
-      setDetails([...done, { ...data, id: getId }]);// add as new entry 
+      setDetails([...done, { ...data, id: getId, date: value }]); // add as new entry
       localStorage.removeItem("updateId");
       setData({ title: "", description: "", day: "" });
       setUpdating(false);
+      setDayFilter(value.format("ddd"));
+      setValue(currentDate);
     } else {
-      setDetails([...details, { ...data, id }]);// add new entry
+      setDetails([...details, { ...data, id, date: value }]); // add new entry
       setData({ title: "", description: "", day: "" }); // default empty fields
       setValue(currentDate); // default date as current date
+      setDayFilter(value.format("ddd"));
     }
   };
 
@@ -59,6 +62,7 @@ function App() {
     const update = details.filter((detail) => detail.id === id)[0];
     localStorage.setItem("updateId", update.id);
     setData(update);
+    setValue(update.date);
     setUpdating(true);
   };
 
@@ -87,7 +91,7 @@ function App() {
           <button type="submit">SAVE</button>
         </div>
       </form>
-      
+
       {/* week buttons */}
       <div className="buttons">
         <ButtonWrapper
@@ -126,7 +130,7 @@ function App() {
           dayFilter={dayFilter}
         />
       </div>
-      
+
       {/* filter according to days of week */}
       <div className="updates">
         {details.length > 0
